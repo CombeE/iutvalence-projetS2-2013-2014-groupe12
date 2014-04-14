@@ -7,6 +7,8 @@ public class Partie {
 		System.out.println("Vous venez de lancer une partie.");
 		
 		Launcher.lancerPartie();
+	
+
 
 	}
 
