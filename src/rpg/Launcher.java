@@ -6,7 +6,7 @@ public class Launcher
 	public static void lancerPartie() 
 	{
 		
-		
+		kjhvjgukyguy
 	}
 	
 }
