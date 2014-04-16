@@ -2,8 +2,8 @@ package rpg;
 
 public class Deplacement {
 
-	public static boolean deplacementValide() {
-		// TODO Auto-generated method stub
+	public static boolean deplacementValide(Positions posDepart, Positions newPos, int pointDeplacement)
+	{
 		return false;
 	}
 

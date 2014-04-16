@@ -9,6 +9,9 @@ public class Perso
 	private int ptPuissance;
 	private int ptMana;
 	private Positions pos;
+	/* Cet attribut n'est pas une constante car une technique pourrait en faire bouger sa valeur
+	 */
+	private int pointDeplacement;
 	
 	public Perso(int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
 	{
@@ -18,6 +21,7 @@ public class Perso
 		this.ptPuissance = ptPuissance;
 		this.ptMana = ptMana;
 		this.pos = pos;
+		this.pointDeplacement = 4;
 	}
 	
 	public Type getType()
@@ -55,9 +59,22 @@ public class Perso
 		return this.pos;
 	}
 	
+	public int getPointDeplacement()
+	{
+		return pointDeplacement;
+	}
+
+	/*
+	 * Le boolean passé en paramètre permet de dire si l'on veut ajouter ou enlever des points de
+	 * déplacements au personnage ou lui en ajouter
+	 */
+	public void modifierPointDeplacement(boolean ajout, int pointDeplacement) {
+		this.pointDeplacement = pointDeplacement;
+	}
+
 	public boolean deplacer(Positions newPos)
 	{
-		if (Deplacement.deplacementValide())
+		if (Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
 			return true;
 		return false;
 	}

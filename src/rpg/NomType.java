@@ -1,5 +1,8 @@
 package rpg;
 
-public enum NomType {
-
+public enum NomType
+{
+	ARCHER,
+	MAGE,
+	GUERRIER;
 }
