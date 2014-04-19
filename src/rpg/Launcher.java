@@ -2,18 +2,14 @@ package rpg;
 
 public class Launcher
 {
-	
-	private Plateau plateau;
-	private Joueur joueur;
-	
-	public Launcher()
+
+	public static void main(String[] args)
 	{
-		this.plateau = new Plateau();
-		this.joueur = null;
+		Partie nouvellePartie = new Partie();
+		
+		Partie.lancerPartie();
+		System.out.println("Vous venez de lancer une nouvelle partie.");
+		
 	}
-	
-	public static void lancerPartie() 
-	{
-	}
-	
+
 }

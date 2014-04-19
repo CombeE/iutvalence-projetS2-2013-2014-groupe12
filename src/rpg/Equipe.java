@@ -17,9 +17,9 @@ public class Equipe
 		return this.nbPerso;
 	}
 	
-	//public void affectePerso()
-	//{
-	//	for (int i=1; i<this.nbPerso;i++)
-	//		this.equipe.get(i)
-	//}
+	public void affectePerso(Perso perso)
+	{
+		for (int i=1; i<this.nbPerso;i++)
+			this.equipe.add(perso);
+	}
 }
