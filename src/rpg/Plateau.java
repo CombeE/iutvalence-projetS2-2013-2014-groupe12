@@ -15,4 +15,26 @@ public class Plateau
 				this.plateau[indiceParcoursLongueurMap][indiceParcoursLargeurMap] = EtatDesCases.LIBRE;
 		
 	}
+	
+	public EtatDesCases[][] getPlateau()
+	{
+		return this.plateau;
+	}
+	
+	public String toString()
+	{
+		String res = "";
+		for (int indiceParcoursLongueurMap=0; indiceParcoursLongueurMap<Plateau.LONGUEUR_DE_LA_MAP; indiceParcoursLongueurMap++)
+		{	
+			for (int indiceParcoursLargeurMap=0; indiceParcoursLargeurMap<Plateau.LARGEUR_DE_LA_MAP; indiceParcoursLargeurMap++)
+				{
+				if (this.plateau[indiceParcoursLongueurMap][indiceParcoursLargeurMap] == EtatDesCases.LIBRE)
+					res+="L";
+				else
+					res+="O";
+				}
+		res+="\n";
+		}
+		return res;
+	}
 }

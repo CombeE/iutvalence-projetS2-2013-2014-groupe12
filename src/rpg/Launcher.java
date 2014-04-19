@@ -10,6 +10,8 @@ public class Launcher
 		Partie.lancerPartie();
 		System.out.println("Vous venez de lancer une nouvelle partie.");
 		
+		System.out.println(nouvellePartie.getPlateau().toString());
+		
 	}
 
 }

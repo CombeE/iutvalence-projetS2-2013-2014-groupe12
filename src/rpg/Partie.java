@@ -16,4 +16,9 @@ public class Partie
 	{
 	}
 	
+	public Plateau getPlateau()
+	{
+		return this.plateau;
+	}
+	
 }
