@@ -21,4 +21,5 @@ public class Partie
 		return this.plateau;
 	}
 	
+	
 }

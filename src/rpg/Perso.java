@@ -9,11 +9,15 @@ public class Perso
 	private int ptPuissance;
 	private int ptMana;
 	private Positions pos;
-	/* Cet attribut n'est pas une constante car une technique pourrait en faire bouger sa valeur
+	/** Cet attribut n'est pas une constante car une technique pourrait en faire bouger sa valeur
 	 */
 	private int pointDeplacement;
 	
-	public Perso(int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
+	/**
+	 * Passer le plateau en paramètre permet d'appeller la méthode ajouter... afin de passer l'état
+	 * de la case sur laquelle le perso arrive à occupée.
+	 */
+	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
 	{
 		this.ptVie = ptVie;
 		this.ptAttaque = ptAttaque;
@@ -22,6 +26,7 @@ public class Perso
 		this.ptMana = ptMana;
 		this.pos = pos;
 		this.pointDeplacement = 4;
+		plateau.majPlateau(pos);
 	}
 	
 	public Type getType()
@@ -64,18 +69,22 @@ public class Perso
 		return pointDeplacement;
 	}
 
-	/*
+	/**
 	 * Le boolean passé en paramètre permet de dire si l'on veut ajouter ou enlever des points de
 	 * déplacements au personnage ou lui en ajouter
 	 */
-	public void modifierPointDeplacement(boolean ajout, int pointDeplacement) {
-		this.pointDeplacement = pointDeplacement;
+	public void modifierPointDeplacement(boolean ajout, int pointDeplacement)
+	{
+		if (ajout == true)
+			this.pointDeplacement += pointDeplacement;
+		else
+			this.pointDeplacement -= pointDeplacement;
 	}
 
 	public boolean deplacer(Positions newPos)
 	{
-		if (Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
-			return true;
-		return false;
+		if (!Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
+			return false;
+		return true;
 	}
 }

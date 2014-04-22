@@ -21,6 +21,11 @@ public class Plateau
 		return this.plateau;
 	}
 	
+	public void majPlateau(Positions pos)
+	{
+		this.plateau[pos.getLigne()][pos.getColonne()] = EtatDesCases.OCCUPEE;
+	}
+	
 	public String toString()
 	{
 		String res = "";
