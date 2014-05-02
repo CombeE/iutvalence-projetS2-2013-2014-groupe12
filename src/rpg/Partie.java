@@ -12,7 +12,7 @@ public class Partie
 		this.joueur = null;
 	}
 	
-	public static void lancerPartie() 
+	public void lancerPartie() 
 	{
 	}
 	

@@ -1,8 +1,11 @@
 package rpg;
 
+/**
+ * Classe de démarrage de l'application.
+ */
 public class Launcher
 {
-
+	
 	public static void main(String[] args)
 	{
 		Partie nouvellePartie = new Partie();
