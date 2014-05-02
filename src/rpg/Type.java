@@ -3,7 +3,7 @@ package rpg;
 public class Type
 {
 	private NomType nomType;
-	/* Toutes les techniques à la disposition de ce personnage
+	/** Toutes les techniques à la disposition de ce personnage
 	 */
 	private Technique listeTechnique[];
 

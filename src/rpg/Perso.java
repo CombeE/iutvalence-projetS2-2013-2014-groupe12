@@ -33,21 +33,24 @@ public class Perso
 	 * Position actuelle du personnage sur la map.
 	 */
 	private Positions pos;
-	
+
 	/** Cet attribut n'est pas une constante car une technique pourrait en faire bouger sa valeur
 	 */
 	private int pointDeplacement;
 	
 	/**
-	 * Création d'un nouveau personnage.
+<<<<<<< HEAD
+	 * Création d'un nouveau personnage. Passer le plateau en paramètre permet d'appeller la méthode ajouter... afin de passer l'état
+	 * de la case sur laquelle le perso arrive à occupée.
 	 * @param ptVie ses points de vie disponibles
 	 * @param ptAttaque ses points d'attque disponibles
 	 * @param ptDefense ses points de defense disponibles
 	 * @param ptPuissance sa puissance disponible
 	 * @param ptMana ses points de mana disponibles
 	 * @param pos sa position actuelle
+	 * @param plateau le plata-eau sur lequel est placé le joueur
 	 */
-	public Perso(int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
+	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
 	{
 		this.ptVie = ptVie;
 		this.ptAttaque = ptAttaque;
@@ -56,6 +59,7 @@ public class Perso
 		this.ptMana = ptMana;
 		this.pos = pos;
 		this.pointDeplacement = 4;
+		plateau.majPlateau(pos);
 	}
 	
 	/**
@@ -130,12 +134,18 @@ public class Perso
 		return pointDeplacement;
 	}
 
-	/**Le boolean passé en paramètre permet de dire si l'on veut ajouter ou enlever des points de
+
+	/**
+	 * Le boolean passé en paramètre permet de dire si l'on veut ajouter ou enlever des points de
 	 * déplacements au personnage ou lui en ajouter
 	 */
-	public void modifierPointDeplacement(boolean ajout, int pointDeplacement) 
+
+	public void modifierPointDeplacement(boolean ajout, int pointDeplacement)
 	{
-		this.pointDeplacement = pointDeplacement;
+		if (ajout == true)
+			this.pointDeplacement += pointDeplacement;
+		else
+			this.pointDeplacement -= pointDeplacement;
 	}
 	
 	/**
@@ -145,8 +155,8 @@ public class Perso
 	 */
 	public boolean deplacer(Positions newPos)
 	{
-		if (Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
-			return true;
-		return false;
+		if (!Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
+			return false;
+		return true;
 	}
 }
