@@ -9,11 +9,14 @@ public class Partie
 	public Partie()
 	{
 		this.plateau = new Plateau();
-		this.joueur = null;
+		
+		this.joueur = new Joueur("Joueur 1");
+
 	}
 	
-	public void lancerPartie() 
+	public void passerTour(Perso persoEnCours)
 	{
+		this.joueur.getEquipe().getListePerso().indexOf(persoEnCours);
 	}
 	
 	public Plateau getPlateau()

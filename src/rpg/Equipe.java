@@ -20,9 +20,13 @@ public class Equipe
 		return this.nbPerso;
 	}
 	
+	public List<Perso> getListePerso()
+	{
+		return this.equipe;
+	}
+	
 	public void affectePerso(Perso perso)
 	{
-		for (int i=1; i<this.nbPerso;i++)
-			this.equipe.add(perso);
+		this.equipe.add(perso);
 	}
 }
