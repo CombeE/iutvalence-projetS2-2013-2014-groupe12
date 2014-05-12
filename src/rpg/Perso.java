@@ -50,7 +50,8 @@ public class Perso
 	 * @param pos sa position actuelle
 	 * @param plateau le plata-eau sur lequel est placé le joueur
 	 */
-	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana, Positions pos)
+	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana,
+			Positions pos)
 	{
 		this.ptVie = ptVie;
 		this.ptAttaque = ptAttaque;

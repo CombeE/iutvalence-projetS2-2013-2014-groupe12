@@ -5,6 +5,9 @@ import java.util.List;
 public class Equipe
 {
 	private int nbPerso;
+	/**
+	 * Liste pour permettre le passage au tour du joueur suivant plus simple
+	 */
 	private List<Perso> equipe;
 	
 	public Equipe(int nbPerso)
