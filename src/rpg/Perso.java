@@ -1,26 +1,30 @@
 package rpg;
 
+/**
+ * @author Camille Blaser - Ervan Combe
+ *
+ */
 public class Perso
 {
 	/** Le type du personnage.
 	 */
 	private Type type;
 	
-	/** Points de vie du personnage
+	/** Points de vie du personnage.
 	 */
 	private int ptVie;
 	
-	/**Points d'attaque disponibles
+	/**Points d'attaque disponibles.
 	 */
 	private int ptAttaque;
 	
 	/**
-	 * Points de défense disponibles
+	 * Points de défense disponibles.
 	 */
 	private int ptDefense;
 	
 	/**
-	 * Puissance des attaques lancées par le personnage
+	 * Puissance des attaques lancées par le personnage.
 	 */
 	private int ptPuissance;
 	
@@ -38,17 +42,16 @@ public class Perso
 	 */
 	private int pointDeplacement;
 	
+	
 	/**
-<<<<<<< HEAD
-	 * Création d'un nouveau personnage. Passer le plateau en paramètre permet d'appeller la méthode ajouter... afin de passer l'état
-	 * de la case sur laquelle le perso arrive à occupée.
+	 * Création d'un nouveau personnage.
 	 * @param ptVie ses points de vie disponibles
 	 * @param ptAttaque ses points d'attque disponibles
 	 * @param ptDefense ses points de defense disponibles
 	 * @param ptPuissance sa puissance disponible
 	 * @param ptMana ses points de mana disponibles
 	 * @param pos sa position actuelle
-	 * @param plateau le plata-eau sur lequel est placé le joueur
+	 * @param plateau le plataeau sur lequel est placé le joueur
 	 */
 	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana,
 			Positions pos)
@@ -63,9 +66,10 @@ public class Perso
 		plateau.majPlateau(pos);
 	}
 	
+	
 	/**
-	 * accesseur en lecture du type
-	 * @return
+	 * Accesseur en lecture du type du personnage.
+	 * @return le type du personnage
 	 */
 	public Type getType()
 	{
@@ -73,8 +77,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture des points de vie
-	 * @return
+	 * Accesseur en lecture des points de vie.
+	 * @return le nombre de points de vie du personnage
 	 */
 	public int getPtVie()
 	{
@@ -82,8 +86,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture des points d'attaque
-	 * @return
+	 * Accesseur en lecture des points d'attaque.
+	 * @return le nombre de points d'attaque du personnage
 	 */
 	public int getPtAttaque()
 	{
@@ -91,8 +95,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture des points de défense
-	 * @return
+	 * Accesseur en lecture des points de défense.
+	 * @return le nombre de points de vie du personnage
 	 */
 	public int getPtDefense()
 	{
@@ -100,8 +104,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture de la puissance
-	 * @return
+	 * Accesseur en lecture de la puissance.
+	 * @return le nombre de points de puissance
 	 */
 	public int getPtPuissance()
 	{
@@ -109,8 +113,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture des points de mana
-	 * @return
+	 * Accesseur en lecture des points de mana.
+	 * @return le nombre de points de mana
 	 */
 	public int getPtMana()
 	{
@@ -118,8 +122,8 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture de la position
-	 * @return
+	 * Accesseur en lecture de la position.
+	 * @return la position du personnage
 	 */
 	public Positions getPos()
 	{
@@ -127,20 +131,20 @@ public class Perso
 	}
 	
 	/**
-	 * accesseur en lecture des points de déplacement disponibles
-	 * @return
+	 * Accesseur en lecture des points de déplacement disponibles.
+	 * @return le nombre de points de déplacement du personnage
 	 */
 	public int getPointDeplacement()
 	{
-		return pointDeplacement;
+		return this.pointDeplacement;
 	}
 
 
 	/**
-	 * Le boolean passé en paramètre permet de dire si l'on veut ajouter ou enlever des points de
-	 * déplacements au personnage ou lui en ajouter
+	 * Ajouter ou enlever des points de déplacement au personnage.
+	 * @param ajout vrai ou faux selon si on ajoute ou enlève des points
+	 * @param pointDeplacement le nombre de point de déplacement à modifier
 	 */
-
 	public void modifierPointDeplacement(boolean ajout, int pointDeplacement)
 	{
 		if (ajout == true)
@@ -149,15 +153,17 @@ public class Perso
 			this.pointDeplacement -= pointDeplacement;
 	}
 	
+	
 	/**
 	 * déplacer un personnage su la map.
-	 * @param newPos sa nouvelle position
-	 * @return
+	 * @param deplacement voulu
+	 * @return vrai ou faux selon si le deplacement a pu être fait
 	 */
-	public boolean deplacer(Positions newPos)
+	public boolean deplacer(Deplacement deplacement)
 	{
-		if (!Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
+		if (!deplacement.deplacementValide())
 			return false;
+		this.pos = deplacement.newPos;
 		return true;
 	}
 }
