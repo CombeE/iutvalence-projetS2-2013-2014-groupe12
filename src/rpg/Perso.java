@@ -158,6 +158,7 @@ public class Perso
 	{
 		if (!Deplacement.deplacementValide(this.pos, newPos, this.pointDeplacement))
 			return false;
+		this.pos = newPos;
 		return true;
 	}
 }
