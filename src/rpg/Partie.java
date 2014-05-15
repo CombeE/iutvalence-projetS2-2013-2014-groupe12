@@ -1,11 +1,21 @@
 package rpg;
 
+import java.util.List;
+
 public class Partie
 {
 	
 	private Plateau plateau;
 	private Joueur joueur;
+	/**
+	 * pour appeler sur le joueur en cours les methodes sans avoir à le chercher à chaque fois dans
+	 * la liste des persos
+	 */
 	private Perso persoEnCours;
+	/**
+	 * La liste des personnages ennemies pour simplifier la méthode attaquer
+	 */
+	private List<Perso> listePersoEnnemie;
 	
 	public Partie()
 	{
@@ -14,6 +24,11 @@ public class Partie
 		this.joueur = new Joueur("Joueur 1");
 		
 		this.persoEnCours = null;
+		
+		for (int indiceDeParcoursDeLaListeEnnemie = 0; indiceDeParcoursDeLaListeEnnemie<joueur.getEquipe().getNbPerso(); indiceDeParcoursDeLaListeEnnemie++)
+		{
+			//Importation du module random pour placer les personnages ennemis partout sur la map
+		}
 
 	}
 	
@@ -42,7 +57,41 @@ public class Partie
 		{
 			newPos = new Positions(posActu.getLigne()+1, posActu.getColonne());
 		}
+			
+		case GAUCHE:
+		{
+			newPos = new Positions(posActu.getLigne()-1, posActu.getColonne());	
 		}
+		
+		case HAUT:
+		{
+			newPos = new Positions(posActu.getLigne(), posActu.getColonne()-1);
+		}
+		
+		case BAS:
+		{
+			newPos = new Positions(posActu.getLigne(), posActu.getColonne()+1);
+		}
+		
+		default:
+		{
+			newPos = new Positions(posActu.getLigne(), posActu.getColonne()); 
+		}
+		}
+		this.persoEnCours.deplacer(newPos);
+	}
+	
+	public void attaquer(Positions pos)
+	{
+		if (plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
+			return;
+		Perso persoAttaque;
+		for (int persoSurLaPosSelectionnee = 0; persoSurLaPosSelectionnee<joueur.getEquipe().getNbPerso(); persoSurLaPosSelectionnee++)
+		{
+			//Recherche la correspondance entre la pos passé en parametre et le perso ennemi qui s'y trouve
+		}
+		
+			
 	}
 	
 	public Plateau getPlateau()
