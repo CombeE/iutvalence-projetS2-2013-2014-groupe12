@@ -32,6 +32,7 @@ public class Joueur
 	public Joueur(String nom)
 	{
 		this.nom = nom;
+		this.equipe = new Equipe(3);
 	}
 	
 	

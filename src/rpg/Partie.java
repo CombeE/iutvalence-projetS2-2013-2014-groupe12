@@ -14,15 +14,21 @@ public class Partie
 	
 	
 	/**
-	 * Le joueur de la partie.
+	 * Premier joueur de la partie.
 	 */
-	private Joueur joueur;
+	private Joueur joueur1;
+	
+	/**
+	 * Deuxième joueur de la partie.
+	 */
+	private Joueur joueur2;
 	
 	/**
 	 * Le personnage entrain de jouer.
 	 */
 	private Perso persoEnCours;
 	
+
 	
 	/**
 	 * Créer une nouvelle partie.
@@ -30,8 +36,8 @@ public class Partie
 	public Partie()
 	{
 		this.plateau = new Plateau();
-		this.joueur = new Joueur("Joueur 1");
-		this.persoEnCours = null;
+		this.joueur1 = new Joueur("Joueur 1");
+		this.joueur2 = new Joueur("Joueur 2");
 	}
 
 	
@@ -41,10 +47,10 @@ public class Partie
 	 */
 	public Perso persoSuivant()
 	{
-		int temp = this.joueur.getEquipe().getListePerso().indexOf(this.persoEnCours);
-		if (temp != this.joueur.getEquipe().getNbPerso())
-			return this.joueur.getEquipe().getListePerso().get(temp+1);
-		return this.joueur.getEquipe().getListePerso().get(0);
+		int temp = this.joueur1.getEquipe().getListePerso().indexOf(this.persoEnCours);
+		if (temp != this.joueur1.getEquipe().getNbPerso())
+			return this.joueur1.getEquipe().getListePerso().get(temp+1);
+		return this.joueur1.getEquipe().getListePerso().get(0);
 	}
 
 
@@ -59,12 +65,17 @@ public class Partie
 	
 	/**
 	 * Déplacer un personnage.
+	 * @param dep le deplacement à effectuer
+	 */
+	public void seDeplacer2(Deplacement dep)
+	{
+		this.persoEnCours.deplacer(dep);
+	}
+	
+	/**
+	 * Déplacer un personnage.
 	 * @param dir direction vers laquelle le personnage va se déplacer
 	 */
-	//public void seDeplacer2(Deplacement dep)
-	//	{
-	//		this.persoEnCours.deplacer(dep);
-	//	}
 	public void seDeplacer(Direction dir)
 	{
 	
