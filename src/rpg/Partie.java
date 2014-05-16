@@ -2,98 +2,106 @@ package rpg;
 
 import java.util.List;
 
+/**
+ * @author Camille Blaser - Ervan Combe
+ *
+ */
 public class Partie
 {
 	
-	private Plateau plateau;
-	private Joueur joueur;
 	/**
-	 * pour appeler sur le joueur en cours les methodes sans avoir à le chercher à chaque fois dans
-	 * la liste des persos
+	 * Le plateau de jeu d'une partie.
+	 */
+	private Plateau plateau;
+	/**
+	 * le joueur actuellement en train de jouer
 	 */
 	private Perso persoEnCours;
-	/**
-	 * La liste des personnages ennemies pour simplifier la méthode attaquer
-	 */
-	private List<Perso> listePersoEnnemie;
 	
+	/**
+	 * Premier joueur de la partie.
+	 */
+	private Joueur joueur1;
+	
+	/**
+	 * Deuxième joueur de la partie.
+	 */
+	private Joueur joueur2;
+	
+	/**
+	 * Créer une nouvelle partie.
+	 */
 	public Partie()
 	{
 		this.plateau = new Plateau();
 		
-		this.joueur = new Joueur("Joueur 1");
+		this.joueur1 = new Joueur("Joueur 1");
+		
+		this.joueur2 = new Joueur("Joueur 2");
 		
 		this.persoEnCours = null;
-		
-		for (int indiceDeParcoursDeLaListeEnnemie = 0; indiceDeParcoursDeLaListeEnnemie<joueur.getEquipe().getNbPerso(); indiceDeParcoursDeLaListeEnnemie++)
-		{
-			//Importation du module random pour placer les personnages ennemis partout sur la map
-		}
+	}
 
+	public Joueur getJoueur(int numJoueur)
+	{
+		if (numJoueur == 1)
+			return this.joueur1;
+		return this.joueur2;
 	}
 	
+	public void choisirEquipe(Joueur joueur, Perso listeP[])
+	{
+		for (int indicePerso = 0; indicePerso<joueur.getEquipe().getNbPerso(); indicePerso++)
+		{
+			joueur.getEquipe().affectePerso(listeP[indicePerso]);
+		}
+	}
+	
+	/**
+	 * Un autre personnage prend la main et joue.
+	 * @return personnage qui va jouer
+	 */
 	public Perso persoSuivant()
 	{
-		int temp = this.joueur.getEquipe().getListePerso().indexOf(this.persoEnCours);
-		if (temp != this.joueur.getEquipe().getNbPerso())
-			return this.joueur.getEquipe().getListePerso().get(temp+1);
-		return this.joueur.getEquipe().getListePerso().get(0);
+		int temp = this.joueur1.getEquipe().getListePerso().indexOf(this.persoEnCours);
+		if (temp != this.joueur1.getEquipe().getNbPerso())
+			return this.joueur1.getEquipe().getListePerso().get(temp+1);
+		return this.joueur1.getEquipe().getListePerso().get(0);
 	}
-	
+
+
+	/**
+	 * Passer le tour d'un personnage dans une partie.
+	 */
 	public void passerTour()
 	{
 		this.persoEnCours = persoSuivant();
 	}
 	
-	public void seDeplacer(Direction dir)
+	
+	/**
+	 * Déplacer un personnage.
+	 * @param dep le deplacement à effectuer
+	 */
+	public void seDeplacer(Deplacement dep)
 	{
-		Positions posActu = this.persoEnCours.getPos();
-		
-		Positions newPos;
-		
-		switch(dir)
-		{
-		case DROITE:
-		{
-			newPos = new Positions(posActu.getLigne()+1, posActu.getColonne());
-		}
-			
-		case GAUCHE:
-		{
-			newPos = new Positions(posActu.getLigne()-1, posActu.getColonne());	
-		}
-		
-		case HAUT:
-		{
-			newPos = new Positions(posActu.getLigne(), posActu.getColonne()-1);
-		}
-		
-		case BAS:
-		{
-			newPos = new Positions(posActu.getLigne(), posActu.getColonne()+1);
-		}
-		
-		default:
-		{
-			newPos = new Positions(posActu.getLigne(), posActu.getColonne()); 
-		}
-		}
-		this.persoEnCours.deplacer(newPos);
+		this.persoEnCours.deplacer(dep);
 	}
 	
 	public void attaquer(Positions pos)
 	{
 		if (plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
 			return;
-		Perso persoAttaque;
-		for (int persoSurLaPosSelectionnee = 0; persoSurLaPosSelectionnee<joueur.getEquipe().getNbPerso(); persoSurLaPosSelectionnee++)
-		{
-			//Recherche la correspondance entre la pos passé en parametre et le perso ennemi qui s'y trouve
-		}
+		//Perso persoAttaque = persoSurPlateau.get(pos);
 		
-			
+					
 	}
 	
+	
+	/**
+	 * Obtenir le plateau de jeu.
+	 * @return le plateau
+	 */
 	public Plateau getPlateau()
 	{
 		return this.plateau;
