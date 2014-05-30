@@ -42,6 +42,11 @@ public class Partie
 		this.persoEnCours = null;
 	}
 
+	/**
+	 * Obtenir un joueur.
+	 * @param numJoueur le numéro du joueur
+	 * @return le joueur 2 ou 1
+	 */
 	public Joueur getJoueur(int numJoueur)
 	{
 		if (numJoueur == 1)
@@ -49,6 +54,11 @@ public class Partie
 		return this.joueur2;
 	}
 	
+	/**
+	 * Un joueur choisit son équipe.
+	 * @param joueur le joueur qui choisit
+	 * @param listeP les personnages de l'équipe
+	 */
 	public void choisirEquipe(Joueur joueur, Perso listeP[])
 	{
 		for (int indicePerso = 0; indicePerso<joueur.getEquipe().getNbPerso(); indicePerso++)
@@ -88,9 +98,13 @@ public class Partie
 		this.persoEnCours.deplacer(dep);
 	}
 	
+	/**
+	 * Attaquer un personnage de l'équipe adverse.
+	 * @param pos la position où se trouve le personnage à attaquer.
+	 */
 	public void attaquer(Positions pos)
 	{
-		if (plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
+		if (this.plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
 			return;
 		//Perso persoAttaque = persoSurPlateau.get(pos);
 		

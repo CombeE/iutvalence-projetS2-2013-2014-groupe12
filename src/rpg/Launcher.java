@@ -6,6 +6,10 @@ package rpg;
 public class Launcher
 {
 
+	/**
+	 * Méthode principale pour lancer le jeu.
+	 * @param args arguments de la méthode
+	 */
 	public static void main(String[] args)
 	{
 		Partie nouvellePartie = new Partie();
