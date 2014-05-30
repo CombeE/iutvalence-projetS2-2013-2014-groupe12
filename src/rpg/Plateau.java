@@ -47,7 +47,8 @@ public class Plateau
 	
 	/**
 	 * Mettre à jour l'état des cases du plateau de jeu.
-	 * @param pos la position de la case à changer d'état
+	 * @param pos la position de départ devant changer d'état
+	 * @param newPos la position d'arrivée devant changer d'état
 	 */
 	public void majPlateau(Positions pos, Positions newPos)
 	{
