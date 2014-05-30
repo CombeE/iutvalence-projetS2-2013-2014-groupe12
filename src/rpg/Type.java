@@ -10,7 +10,7 @@ public class Type
 	/**
 	 * Le nom du type du personnage.
 	 */
-	private NomType nomType;
+	private DescriptionType nomType;
 	
 	
 	/** 
@@ -24,7 +24,7 @@ public class Type
 	 * @param nom du type
 	 * @param listeTechnique techniques utilisées pas le type
 	 */
-	public Type(NomType nom, List<Technique> listeTechnique)
+	public Type(DescriptionType nom, List<Technique> listeTechnique)
 	{
 		this.nomType = nom;
 		this.listeTechnique = listeTechnique;
@@ -35,7 +35,7 @@ public class Type
 	 * Obtenir le nom du type.
 	 * @return nom du type
 	 */
-	public NomType getNomType()
+	public DescriptionType getNomType()
 	{
 		return this.nomType;
 	}

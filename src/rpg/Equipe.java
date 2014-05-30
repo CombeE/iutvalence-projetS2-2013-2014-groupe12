@@ -1,9 +1,14 @@
 package rpg;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author Camille Blaser - Ervan Combe
+ *
+ */
+/**
+ * @author Pierre Paul
  *
  */
 public class Equipe
@@ -28,6 +33,7 @@ public class Equipe
 	public Equipe(int nbPerso)
 	{
 		this.nbPerso = nbPerso;
+		this.equipe = new LinkedList<Perso>();
 	}
 	
 	
@@ -56,10 +62,42 @@ public class Equipe
 	
 	/**
 	 * Mettre un personnage dans une équipe.
-	 * @param perso à ajouter dans l'équipe
+	 * @param equipe1 à ajouter dans l'équipe
 	 */
-	public void affectePerso(Perso perso)
+	public void affectePerso(Perso equipe1)
 	{
-		this.equipe.add(perso);
+		this.equipe.add(equipe1);
 	}
+	
+	public void affectePerso(Perso[] perso)
+	{
+		for (int indicePerso = 0; indicePerso < this.nbPerso; indicePerso++)
+		{
+			this.equipe.add(perso[indicePerso]);
+		}
+	}
+	
+	public void enleverPerso(Perso perso)
+	{
+		this.equipe.remove(this.equipe.indexOf(perso));
+	}
+
+
+
+	@Override
+	public String toString()
+	{
+		String chaine = "L'equipe est composée de : ";
+		for (int indice = 0; indice<this.nbPerso; indice++)
+		{
+			chaine += this.equipe.get(indice).getType().getNomType().obtenirLabel();
+			if (indice != this.nbPerso-1)
+				chaine+=", ";
+			else
+				chaine+=".";
+		}
+		return chaine;
+	}
+	
+	
 }

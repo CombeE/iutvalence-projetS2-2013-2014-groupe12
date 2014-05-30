@@ -21,7 +21,7 @@ public class Positions
 	 * @param longueur en ligne
 	 * @param largeur en colonne
 	 */
-	public Positions(int longueur, int largeur)
+	public Positions(int largeur, int longueur)
 	{
 		this.ligne = largeur;
 		this.colonne = longueur;

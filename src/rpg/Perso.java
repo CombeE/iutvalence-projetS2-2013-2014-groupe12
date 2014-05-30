@@ -1,5 +1,7 @@
 package rpg;
 
+import java.util.Random;
+
 /**
  * @author Camille Blaser - Ervan Combe
  *
@@ -42,6 +44,10 @@ public class Perso
 	 */
 	private int pointDeplacement;
 	
+	/**
+	 * Poertée d'attaque du personnage
+	 */
+	private int portee;
 	
 	/**
 	 * Création d'un nouveau personnage.
@@ -52,10 +58,13 @@ public class Perso
 	 * @param ptMana ses points de mana disponibles
 	 * @param pos sa position actuelle
 	 * @param plateau le plataeau sur lequel est placé le joueur
+	 * @param portee 
+	 * @param portee dont dispose le personnage
 	 */
-	public Perso(Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana,
-			Positions pos)
+	public Perso(Type type,Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana,
+			Positions pos, int portee)
 	{
+		this.type = type;
 		this.ptVie = ptVie;
 		this.ptAttaque = ptAttaque;
 		this.ptDefense = ptDefense;
@@ -63,7 +72,24 @@ public class Perso
 		this.ptMana = ptMana;
 		this.pos = pos;
 		this.pointDeplacement = 4;
-		plateau.majPlateau(pos);
+		this.portee = portee;
+		plateau.majPlateau(pos,null);
+	}
+	/**
+	 * Génère un personnage aléatoire
+	 */
+	public Perso(Plateau plateau)
+	{
+		this.type = new Type(DescriptionType.values()[new Random().nextInt(DescriptionType.values().length)],null);
+		this.ptVie = this.type.getNomType().obtenirPtVie();
+		this.ptAttaque = this.type.getNomType().obtenirPtAttaque();
+		this.ptDefense = this.type.getNomType().obtenirPtDefense();
+		this.ptPuissance = this.type.getNomType().obtenirPtPuissance();
+		this.ptMana = this.type.getNomType().obtenirPtMana();
+		this.pos = new Positions(new Random().nextInt(Plateau.LARGEUR_DE_LA_MAP),new Random().nextInt(Plateau.LONGUEUR_DE_LA_MAP));
+		this.pointDeplacement = this.type.getNomType().obtenirPtDeplacement();
+		this.portee = this.type.getNomType().obtenirPortee();
+		plateau.majPlateau(pos,null);
 	}
 	
 	
@@ -139,6 +165,15 @@ public class Perso
 		return this.pointDeplacement;
 	}
 
+	/**
+	 * Accesseur en lecture de la portée d'attaque du personnage.
+	 * @return la portée du personnage
+	 */
+	public int getPortee()
+	{
+		return this.portee;
+	}
+	
 	public void modifierPtVie(int modif, boolean ajout)
 	{
 		if (ajout)
@@ -153,6 +188,11 @@ public class Perso
 			this.ptMana += modif;
 		else
 			this.ptMana -= modif;
+	}
+	
+	public void modifierPos(Positions pos)
+	{
+		this.pos = pos;
 	}
 	/**
 	 * Ajouter ou enlever des points de déplacement au personnage.
@@ -175,9 +215,9 @@ public class Perso
 	 */
 	public boolean deplacer(Deplacement deplacement)
 	{
-		if (!deplacement.deplacementValide())
+		if (!deplacement.deplacementValide(this.pointDeplacement,deplacement))
 			return false;
-		this.pos = deplacement.newPos;
+		this.modifierPos(deplacement.getNewPos());
 		return true;
 	}
 }

@@ -1,7 +1,5 @@
 package rpg;
 
-import java.util.List;
-
 /**
  * @author Camille Blaser - Ervan Combe
  *
@@ -29,6 +27,11 @@ public class Partie
 	private Joueur joueur2;
 	
 	/**
+	 * Joueur en train de joueur
+	 */
+	private Joueur joueurEnCours;
+	
+	/**
 	 * Créer une nouvelle partie.
 	 */
 	public Partie()
@@ -39,6 +42,8 @@ public class Partie
 		
 		this.joueur2 = new Joueur("Joueur 2");
 		
+		this.joueurEnCours = joueur1;
+
 		this.persoEnCours = null;
 	}
 
@@ -63,6 +68,10 @@ public class Partie
 	 */
 	public Perso persoSuivant()
 	{
+		if (this.persoEnCours == null)
+		{
+			this.persoEnCours = this.joueurEnCours.getEquipe().getListePerso().get(0);
+		}
 		int temp = this.joueur1.getEquipe().getListePerso().indexOf(this.persoEnCours);
 		if (temp != this.joueur1.getEquipe().getNbPerso())
 			return this.joueur1.getEquipe().getListePerso().get(temp+1);
@@ -92,7 +101,33 @@ public class Partie
 	{
 		if (plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
 			return;
-		//Perso persoAttaque = persoSurPlateau.get(pos);
+		Joueur joueurAttaque;
+		if (this.joueurEnCours == joueur1)
+			joueurAttaque = joueur2;
+		else
+			joueurAttaque = joueur1;
+		Perso persoSurPlateau = joueurAttaque.getPosMap().get(pos);
+		
+		int distance = 0;
+		if (persoSurPlateau.getPos().getLigne() < this.persoEnCours.getPos().getLigne())
+			distance += this.persoEnCours.getPos().getLigne()-persoSurPlateau.getPos().getLigne();
+		else
+			distance += persoSurPlateau.getPos().getLigne() - this.getPersoEnCours().getPos().getLigne();
+		if (persoSurPlateau.getPos().getColonne() < this.getPersoEnCours().getPos().getColonne())
+			distance += this.getPersoEnCours().getPos().getColonne() - persoSurPlateau.getPos().getColonne();
+		else
+			distance += persoSurPlateau.getPos().getColonne() - this.getPersoEnCours().getPos().getColonne();
+		
+		if (this.persoEnCours.getPortee() < distance)
+		{
+			System.out.println("Cible hors d'atteinte.");
+			return;
+		}
+		
+		if (this.persoEnCours.getPtAttaque() < joueurAttaque.getPosMap().get(pos).getPtDefense())
+			return;
+				
+		persoSurPlateau.modifierPtVie(this.persoEnCours.getPtAttaque()-joueurAttaque.getPosMap().get(pos).getPtDefense(), false);
 		
 					
 	}
@@ -106,6 +141,17 @@ public class Partie
 	{
 		return this.plateau;
 	}
+	
+	public Joueur getJoueurEnCours()
+	{
+		return this.joueurEnCours;
+	}
+	
+	public Perso getPersoEnCours()
+	{
+		return this.persoEnCours;
+	}
+	
 	
 	
 }

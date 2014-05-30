@@ -1,17 +1,17 @@
 package rpg;
 
+import java.util.Hashtable;
+import java.util.Map;
+
 /**
  * @author Camille Blaser - Ervan Combe
  *
  */
 public class Joueur
 {
-	/**
-	 * Nombre de point de vie d'un joueur : 
-	 * somme des points de vie des personnages de son équipe.
-	 */
-	private int nbPointVie;
-	
+	//Supression de l'attribut "points de vie" du joueur. Il est plus simple d'enlever les personnages
+	//morts de l'équipe du joueur au fur et à mesure qu'ils meurent et une fois que l'équipe est vide
+	//on considère qu'il a perdu.
 	
 	/**
 	 * Le nom du joueur.
@@ -24,6 +24,8 @@ public class Joueur
 	 */
 	private Equipe equipe;
 	
+	private Map<Positions,Perso> posPersonnage;
+	
 	
 	/**
 	 * Créer un nouveau joueur
@@ -33,16 +35,7 @@ public class Joueur
 	{
 		this.nom = nom;
 		this.equipe = new Equipe(3);
-	}
-	
-	
-	/**
-	 * Obtenir le nombre de points de vie du joueur.
-	 * @return nombre de points de vie
-	 */
-	public int getNbPointVie()
-	{
-		return this.nbPointVie;
+		this.posPersonnage = new Hashtable<Positions, Perso>();
 	}
 	
 	
@@ -65,6 +58,11 @@ public class Joueur
 		return this.equipe;
 	}
 	
+	public Map<Positions,Perso> getPosMap()
+	{
+		return this.posPersonnage;
+	}
+	
 	
 	/**
 	 * Savoir si le joueur a gagné.
@@ -72,8 +70,13 @@ public class Joueur
 	 */
 	public boolean aGagne()
 	{
-		if (this.nbPointVie == 0)
+		if (this.getEquipe().getListePerso().size() == 0)
 			return true;
 		return false;
+	}
+	
+	public void ajoutPerso(Perso perso)
+	{
+		this.posPersonnage.put(perso.getPos(), perso);
 	}
 }
