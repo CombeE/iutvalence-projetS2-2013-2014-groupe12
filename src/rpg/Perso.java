@@ -61,19 +61,17 @@ public class Perso
 	 * @param portee 
 	 * @param portee dont dispose le personnage
 	 */
-	public Perso(Type type,Plateau plateau, int ptVie,int ptAttaque,int ptDefense,int ptPuissance,int ptMana,
-			Positions pos, int portee)
+	public Perso(Type type,Plateau plateau)
 	{
 		this.type = type;
-		this.ptVie = ptVie;
-		this.ptAttaque = ptAttaque;
-		this.ptDefense = ptDefense;
-		this.ptPuissance = ptPuissance;
-		this.ptMana = ptMana;
-		this.pos = pos;
-		this.pointDeplacement = 4;
-		this.portee = portee;
-		plateau.majPlateau(pos,null);
+		this.ptVie = this.type.getNomType().obtenirPtVie();
+		this.ptAttaque = this.type.getNomType().obtenirPtAttaque();
+		this.ptDefense = this.type.getNomType().obtenirPtDefense();
+		this.ptPuissance = this.type.getNomType().obtenirPtPuissance();
+		this.ptMana = this.type.getNomType().obtenirPtMana();
+		this.pos = new Positions(new Random().nextInt(Plateau.LARGEUR_DE_LA_MAP),new Random().nextInt(Plateau.LONGUEUR_DE_LA_MAP));
+		this.pointDeplacement = this.type.getNomType().obtenirPtDeplacement();
+		this.portee = this.type.getNomType().obtenirPortee();
 	}
 	/**
 	 * Génère un personnage aléatoire
