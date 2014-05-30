@@ -10,12 +10,12 @@ public class Plateau
 	/**
 	 * Longueur du plateau de jeu.
 	 */
-	public final static int LONGUEUR_DE_LA_MAP = 50;
+	public final static int LONGUEUR_DE_LA_MAP = 25;
 	
 	/**
 	 * Largeur du plateau de jeu.
 	 */
-	public final static int LARGEUR_DE_LA_MAP = 50;
+	public final static int LARGEUR_DE_LA_MAP = 25;
 	
 	/**
 	 * Le tableau représentant le plateau de jeu. Les cases sont libres ou occupées.
@@ -49,8 +49,16 @@ public class Plateau
 	 * Mettre à jour l'état des cases du plateau de jeu.
 	 * @param pos la position de la case à changer d'état
 	 */
-	public void majPlateau(Positions pos)
+	public void majPlateau(Positions pos, Positions newPos)
 	{
+		if (!(newPos == null))
+		{
+			this.plateau[pos.getLigne()][pos.getColonne()] = EtatDesCases.LIBRE;
+			this.plateau[newPos.getLigne()][newPos.getColonne()] = EtatDesCases.OCCUPEE;
+			return;
+		}
+		if (this.plateau[pos.getLigne()][pos.getColonne()] == EtatDesCases.OCCUPEE)
+			return;
 		this.plateau[pos.getLigne()][pos.getColonne()] = EtatDesCases.OCCUPEE;
 	}
 	
