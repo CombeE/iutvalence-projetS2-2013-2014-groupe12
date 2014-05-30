@@ -24,6 +24,9 @@ public class Joueur
 	 */
 	private Equipe equipe;
 	
+	/**
+	 * Carte  des positions occupées par les personnages.
+	 */
 	private Map<Positions,Perso> posPersonnage;
 	
 	
@@ -58,6 +61,10 @@ public class Joueur
 		return this.equipe;
 	}
 	
+	/**
+	 * Obtenir la position des personnages d'un joueur.
+	 * @return les positions des personnages
+	 */
 	public Map<Positions,Perso> getPosMap()
 	{
 		return this.posPersonnage;
@@ -75,6 +82,10 @@ public class Joueur
 		return false;
 	}
 	
+	/**
+	 * Ajouter un personnage et sa position sur la carte des position du joueur.
+	 * @param perso le personnage à ajouter
+	 */
 	public void ajoutPerso(Perso perso)
 	{
 		this.posPersonnage.put(perso.getPos(), perso);

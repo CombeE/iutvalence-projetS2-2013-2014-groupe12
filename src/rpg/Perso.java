@@ -58,8 +58,8 @@ public class Perso
 	 * @param ptMana ses points de mana disponibles
 	 * @param pos sa position actuelle
 	 * @param plateau le plataeau sur lequel est placé le joueur
-	 * @param portee 
 	 * @param portee dont dispose le personnage
+	 * @param type du personnage que l'on crée
 	 */
 	public Perso(Type type,Plateau plateau)
 	{
@@ -75,6 +75,7 @@ public class Perso
 	}
 	/**
 	 * Génère un personnage aléatoire
+	 * @param plateau sur lequel on ajoute le personnage
 	 */
 	public Perso(Plateau plateau)
 	{
@@ -87,7 +88,7 @@ public class Perso
 		this.pos = new Positions(new Random().nextInt(Plateau.LARGEUR_DE_LA_MAP),new Random().nextInt(Plateau.LONGUEUR_DE_LA_MAP));
 		this.pointDeplacement = this.type.getNomType().obtenirPtDeplacement();
 		this.portee = this.type.getNomType().obtenirPortee();
-		plateau.majPlateau(pos,null);
+		plateau.majPlateau(this.pos,null);
 	}
 	
 	
@@ -172,6 +173,11 @@ public class Perso
 		return this.portee;
 	}
 	
+	/**
+	 * Modifier les points de vie d'un personnage
+	 * @param modif les points à ajouter ou soustraire
+	 * @param ajout vrai si ajout, faux si soustraction
+	 */
 	public void modifierPtVie(int modif, boolean ajout)
 	{
 		if (ajout)
@@ -180,6 +186,11 @@ public class Perso
 			this.ptVie -= modif;
 	}
 
+	/**
+	 * Modifier les points de mana d'un personnage
+	 * @param modif les points a ajouter ou soustraire
+	 * @param ajout vrai si ajout, faux si soustraction
+	 */
 	public void modifierPtMana(int modif, boolean ajout)
 	{
 		if (ajout)
@@ -188,10 +199,15 @@ public class Perso
 			this.ptMana -= modif;
 	}
 	
+	/**
+	 * Modifier la position d'un personnage.
+	 * @param pos la nouvelle position du personnage
+	 */
 	public void modifierPos(Positions pos)
 	{
 		this.pos = pos;
 	}
+	
 	/**
 	 * Ajouter ou enlever des points de déplacement au personnage.
 	 * @param ajout vrai ou faux selon si on ajoute ou enlève des points
@@ -213,7 +229,7 @@ public class Perso
 	 */
 	public boolean deplacer(Deplacement deplacement)
 	{
-		if (!deplacement.deplacementValide(this.pointDeplacement,deplacement))
+		if (!deplacement.deplacementValide(this.pointDeplacement))
 			return false;
 		this.modifierPos(deplacement.getNewPos());
 		return true;

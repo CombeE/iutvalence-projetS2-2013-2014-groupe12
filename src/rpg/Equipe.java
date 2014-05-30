@@ -69,6 +69,10 @@ public class Equipe
 		this.equipe.add(equipe1);
 	}
 	
+	/**
+	 * Affecter un personnage à une équipe.
+	 * @param perso le tableau des personnages à affecter
+	 */
 	public void affectePerso(Perso[] perso)
 	{
 		for (int indicePerso = 0; indicePerso < this.nbPerso; indicePerso++)
@@ -77,6 +81,10 @@ public class Equipe
 		}
 	}
 	
+	/**
+	 * Enlever un personnage d'une équipe.
+	 * @param perso le personnage à enlever
+	 */
 	public void enleverPerso(Perso perso)
 	{
 		this.equipe.remove(this.equipe.indexOf(perso));

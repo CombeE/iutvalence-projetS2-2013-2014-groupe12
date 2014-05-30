@@ -16,39 +16,51 @@ public class Deplacement {
 	 */
 	private Positions newPos;
 	
+	/**
+	 * Créer un nouveau déplacement.
+	 * @param posDep la position de départ
+	 * @param posArriv la position d'arrivée
+	 */
 	public Deplacement(Positions posDep, Positions posArriv)
 	{
 		this.posDep = posDep;
 		this.newPos = posArriv;
 	}
 	
+	/**
+	 * Obtenir la position de départ.
+	 * @return la position de départ
+	 */
 	public Positions getPosDep()
 	{
 		return this.posDep;
 	}
 	
+	/**
+	 * Obtenir la position d'arrivée.
+	 * @return la position d'arrivée
+	 */
 	public Positions getNewPos()
 	{
 		return this.newPos;
 	}
+	
 	/**
 	 * Savoir si le déplacement demandé est valide.
-	 * @param pointDeplacement 
-	 * @param pos 
-	 * @param deplacement 
+	 * @param pointDeplacement les points de déplacement disponibles du personnage
 	 * @return vrai ou faux
 	 */
-	public boolean deplacementValide(int pointDeplacement, Deplacement deplacement)
+	public boolean deplacementValide(int pointDeplacement)
 	{
 		int distance = 0;
-		if (deplacement.posDep.getLigne() < deplacement.newPos.getLigne())
-			distance += newPos.getLigne()-posDep.getLigne();
+		if (this.posDep.getLigne() < this.newPos.getLigne())
+			distance += this.newPos.getLigne()-this.posDep.getLigne();
 		else
-			distance += posDep.getLigne() - newPos.getLigne();
-		if (deplacement.posDep.getColonne() < deplacement.newPos.getColonne())
-			distance += newPos.getColonne() - posDep.getColonne();
+			distance += this.posDep.getLigne() - this.newPos.getLigne();
+		if (this.posDep.getColonne() < this.newPos.getColonne())
+			distance += this.newPos.getColonne() - this.posDep.getColonne();
 		else
-			distance += posDep.getColonne() - newPos.getColonne();
+			distance += this.posDep.getColonne() - this.newPos.getColonne();
 		if (pointDeplacement - distance < 0)
 			return false;
 		

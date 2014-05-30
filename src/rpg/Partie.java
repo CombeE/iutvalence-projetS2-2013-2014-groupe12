@@ -42,7 +42,7 @@ public class Partie
 		
 		this.joueur2 = new Joueur("Joueur 2");
 		
-		this.joueurEnCours = joueur1;
+		this.joueurEnCours = this.joueur1;
 
 		this.persoEnCours = null;
 	}
@@ -116,10 +116,10 @@ public class Partie
 		if (this.plateau.getPlateau()[pos.getLigne()][pos.getColonne()] == EtatDesCases.LIBRE)
 			return;
 		Joueur joueurAttaque;
-		if (this.joueurEnCours == joueur1)
-			joueurAttaque = joueur2;
+		if (this.joueurEnCours == this.joueur1)
+			joueurAttaque = this.joueur2;
 		else
-			joueurAttaque = joueur1;
+			joueurAttaque = this.joueur1;
 		Perso persoSurPlateau = joueurAttaque.getPosMap().get(pos);
 		
 		int distance = 0;
@@ -156,11 +156,19 @@ public class Partie
 		return this.plateau;
 	}
 	
+	/**
+	 * Obtenir le joueur entrain de jouer.
+	 * @return le joueur en cours de jeu
+	 */
 	public Joueur getJoueurEnCours()
 	{
 		return this.joueurEnCours;
 	}
 	
+	/**
+	 * Obetnir le personnage entrain de jouer.
+	 * @return le personnage en cours de jeu
+	 */
 	public Perso getPersoEnCours()
 	{
 		return this.persoEnCours;
