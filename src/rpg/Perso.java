@@ -51,15 +51,8 @@ public class Perso
 	
 	/**
 	 * Création d'un nouveau personnage.
-	 * @param ptVie ses points de vie disponibles
-	 * @param ptAttaque ses points d'attque disponibles
-	 * @param ptDefense ses points de defense disponibles
-	 * @param ptPuissance sa puissance disponible
-	 * @param ptMana ses points de mana disponibles
-	 * @param pos sa position actuelle
-	 * @param plateau le plataeau sur lequel est placé le joueur
-	 * @param portee dont dispose le personnage
 	 * @param type du personnage que l'on crée
+	 * @param plateau le plataeau sur lequel est placé le joueur
 	 */
 	public Perso(Type type,Plateau plateau)
 	{
